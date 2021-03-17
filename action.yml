@@ -4,8 +4,11 @@ branding:
   icon: 'feather'
   color: 'purple'
 inputs:
-  nexus-receiver-endpoint:
-    description: 'The API endpoint in Nexus which receives a message about an update.'
+  nexus-url:
+    description: 'Nexus URL (including http://).'
+    required: true
+  assignment-id:
+    description: 'The ID of the assignment which should receive the update.'
     required: true
 runs:
   using: 'node12'
