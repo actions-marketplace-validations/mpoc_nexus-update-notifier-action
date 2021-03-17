@@ -1,0 +1,12 @@
+name: 'Nexus assignment update notifier'
+description: 'Notifies Nexus about an update to an assignment or grader config definition in a GitHub repo.'
+branding:
+  icon: 'feather'
+  color: 'purple'
+inputs:
+  nexus-receiver-endpoint:
+    description: 'The API endpoint in Nexus which receives a message about an update.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
