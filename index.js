@@ -3,7 +3,10 @@ const core = require("@actions/core");
 
 (async () => {
     try {
-        const endpoint = core.getInput("nexus-receiver-endpoint");
+        const nexusUrl = core.getInput('nexus-url');
+        const assignmentId = core.getInput('assignment-id');
+        
+        const endpoint = `${nexusUrl}/assignments/${assignmentId}/edit_from_git_json`;
 
         const response = await fetch(endpoint).then((res) => res.json());
 
@@ -12,7 +15,6 @@ const core = require("@actions/core");
             core.setFailed(failMessage);
         } else {
             console.log('Success updating assignment');
-
         }
     } catch (error) {
         core.setFailed(error.message);
