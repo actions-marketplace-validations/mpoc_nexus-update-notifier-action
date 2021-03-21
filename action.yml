@@ -4,11 +4,8 @@ branding:
   icon: 'feather'
   color: 'purple'
 inputs:
-  nexus-url:
-    description: 'Nexus URL (including http://).'
-    required: true
-  assignment-id:
-    description: 'The ID of the assignment which should receive the update.'
+  api-endpoint:
+    description: 'The Nexus API endpoint for an assignment repository update.'
     required: true
 runs:
   using: 'node12'

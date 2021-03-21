@@ -3,16 +3,21 @@ const core = require("@actions/core");
 
 (async () => {
     try {
-        const nexusUrl = core.getInput('nexus-url');
-        const assignmentId = core.getInput('assignment-id');
+        const apiEndpoint = core.getInput('api-endpoint');
 
-        const endpoint = `${nexusUrl}/assignments/${assignmentId}/edit_from_git_json`;
+        const response = await fetch(apiEndpoint)
+            .catch(error => { throw new Error(`Invalid request to server: ${error.message}`) });
 
-        const response = await fetch(endpoint).then((res) => res.json());
-        console.log(response);
+        if (!response.ok) {
+            const errorText = `${response.statusText} - ${await response.text()}`;
+            throw new Error(`Invalid response from server ${apiEndpoint}: ${errorText}`);
+        }
 
-        if (!response.success) {
-            const failMessage = `Nexus received update message, but failed updating assignment: ${response.error}`;
+        const responseJson = await response.json()
+            .catch(error => { throw new Error(`Unable to parse JSON from server response: ${error.message}`) });
+
+        if (!responseJson.success) {
+            const failMessage = `Nexus received update message, but failed updating assignment: ${responseJson.error}`;
             core.setFailed(failMessage);
         } else {
             console.log('Success updating assignment');

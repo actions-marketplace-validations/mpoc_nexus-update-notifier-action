@@ -4,13 +4,9 @@ Notifies Nexus about an update to an assignment or grader config definition in a
 
 ## Inputs
 
-### `nexus-url`
+### `api-endpoint`
 
-**Required** Nexus URL (including http://).
-  
-### `assignment-id`
-
-**Required** The ID of the assignment which should receive the update.
+**Required** The Nexus API endpoint for the assignment repository update.
 
 ## Example usage
 
@@ -18,6 +14,5 @@ Notifies Nexus about an update to an assignment or grader config definition in a
 - name: Nexus assignment update notifier
   uses: mpoc/nexus-update-notifier-action@main
   with:
-    nexus-url: http://192.168.99.1:3000
-    assignment-id: 115
+    api-endpoint: http://192.168.99.1:3000/nexus/assignments/129/edit_from_git_json
 ```
